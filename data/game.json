@@ -1,0 +1,113 @@
+{
+    "start_state" : "start",
+
+    "states" : {
+        
+        "start": {
+            "show_text" : ["Mine 100 ore to earn your keep!"],
+			"room" : "main",
+            "next_state" : [ 
+                               {
+                                    "state_name" : "go_in_mine",
+                                    "key_input"  : "Get to Mining"
+                                },
+                                {
+                                    "state_name" : "go_to_foreman",
+                                    "key_input"  : "Talk to Foreman"
+                                }
+                            ]
+        },
+        "go_in_mine" : {
+			"room" : "mine",
+			"show_text" : ["You see a vein of Ore!", "The air smells of Iron!", "You hear the crumbling rocks"],
+			"next_state" : [
+								{
+									"state_name" : "mine_ore",
+									"key_input" : "Mine the Ore"
+								},
+								{
+									"state_name" : "start",
+									"key_input" : "Leave the Mine"
+								}
+							]
+        },
+		"mine_ore" : {
+			"play_sound" : ["sound/PickaxeStrike1.mp3", "sound/PickaxeStrike2.mp3", "sound/PickaxeStrike3.mp3"],
+			"show_text" : ["Strike the rock with all your might!", "Your work will be rewarded!", "Feel the burn!", "Remember to wear eye protection!", "You only need 100 for today!", "Do you hear a rumbling...?"],
+			"room" : "mine",
+			"hide_button" : "a",
+			"show_button" : "c",
+			"lose_button_mine" : "d",
+			"next_state" : [
+								{
+									"state_name" : "start",
+									"key_input" : "Leave the Mine"
+								},
+								{
+									"state_name" : "mine_ore",
+									"key_input" : "Strike the Ore"
+								},
+								{
+									"state_name" : "what_have_you_done",
+									"key_input" : "Dig Deeper"
+								}
+							],
+			"total_rocks" : 1
+		},
+        "go_to_foreman" : {
+            "show_text" : ["You see the Foreman snoozing in a chair...", "The Foreman looks busy with work", "The Foreman greets you with a smile"],
+			"room" : "foreman",
+			"next_state" : [
+								{
+									"state_name" : "start",
+									"key_input" : "Go back to Mine"
+								},
+								{
+									"state_name" : "chat_with_foreman",
+									"key_input" : "Chat"
+								}
+							]
+        },
+		"chat_with_foreman" : {
+            "show_text" : ["How you doin' there, Buddy?", "Boy it sure it hot today!", "Would you mind massaging my bunions?", "Don't you have somewhere to be?", "Get me 100 ore and you're off for the day!"],
+			"room" : "foreman",
+			"win_button_compliment" : "d",
+			"win_button_ore" : "c",
+			"next_state" : [
+								{
+									"state_name" : "start",
+									"key_input" : "Go back to Mine"
+								},
+								{
+									"state_name" : "chat_with_foreman",
+									"key_input" : "Chat"
+								},
+								{
+									"state_name" : "compliment",
+									"key_input" : "Compliment"
+								},
+								{
+									"state_name" : "turn_in_ore",
+									"key_input" : "Turn in Ore"
+								}
+							],
+			"charisma" : 1
+        },
+		"compliment" : {
+			"show_text" : ["The foreman blushes.<br>CONGRATULATIONS<br>You made a new friend!"], 
+			"room" : "end",
+			"next_state" : [{}]
+		},
+		"turn_in_ore" : {
+			"show_text" : ["The foreman accepts your haul.<br>CONGRATULATIONS<br>You earned your keep today!"],
+			"room" : "end",
+			"next_state" : [{}]
+		},
+		"what_have_you_done" : {
+			"show_text" : ["Much like the Dwarves of Khazad-Dum, you have dug too Greedily and too deeply<br>OOPSIES!!!<br>You have released a creature most evil!"],
+			"room" : "end",
+			"next_state" : [{}]
+		}
+    }
+}
+
